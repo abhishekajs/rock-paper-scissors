@@ -1,11 +1,10 @@
+const buttons = document.querySelectorAll("input");
+const displayResult = document.querySelector("div.result");
+const scoreBoard = document.querySelector("div.scoreboard");
 let userScore = 0;
 let compScore = 0;
-
-const delay = () => {
-  setInterval(() => {
-    return;
-  }, 3000);
-};
+let res = "";
+let finalScore = `User : ${userScore}  Computer : ${compScore}`;
 
 const computerPlay = () => {
   let options = ["Rock", "Paper", "Scissors"];
@@ -14,52 +13,57 @@ const computerPlay = () => {
   return compOption;
 };
 
-const playRound = (playerSelection, computerSelection) => {
+const blockButtons = () => {
+  buttons.forEach((btn) => {
+    btn.disabled = true;
+  });
+};
+
+const playRound = (playerSelection) => {
+  const computerSelection = computerPlay();
+
   let info =
     "Player Selected: " +
     playerSelection +
     "\nComputer Selected: " +
     computerSelection;
-  console.log(info);
-  let res = "";
+  // console.log(info);
 
   if (
     (playerSelection === "Rock" && computerSelection === "Scissors") ||
     (playerSelection === "Scissors" && computerSelection === "Paper") ||
     (playerSelection === "Paper" && computerSelection === "Rock")
   ) {
-    res = `You Win! ${playerSelection} beats ${computerSelection}`;
     userScore += 1;
-    console.log(res);
+    res = `You Win! ${playerSelection} beats ${computerSelection}`;
+    finalScore = `User : ${userScore}  Computer : ${compScore}`;
+    // console.log(res);
+
+    if (userScore === 5) {
+      res = `You beat Computer and won this series.`;
+      blockButtons();
+    }
   } else if (playerSelection === computerSelection) {
     res = `It\'s tie! Both selected ${computerSelection}!`;
-    console.log(res);
+    // console.log(res);
   } else {
-    res = `You lose! ${computerSelection} beats ${playerSelection}`;
     compScore += 1;
-    console.log(res);
+    res = `You lose! ${computerSelection} beats ${playerSelection}`;
+    finalScore = `User : ${userScore}  Computer : ${compScore}`;
+    // console.log(res);
+
+    if (compScore === 5) {
+      res = `Computer Won! You lose this series.`;
+      blockButtons();
+    }
   }
 };
 
-const game = () => {
-  while (userScore < 5 && compScore < 5) {
-    let playerSelection = prompt("Enter your choice!");
-    playerSelection =
-      playerSelection.toLowerCase().charAt(0).toUpperCase() +
-      playerSelection.slice(1);
-    let computerSelection = computerPlay();
-
-    playRound(playerSelection, computerSelection);
-    delay();
-  }
-
-  if (userScore < compScore) {
-    console.log("Computer Wins whole set!");
-  } else {
-    console.log("You Win whole set!");
-  }
-
-  return;
-};
-
-game();
+buttons.forEach((button) => {
+  button.addEventListener("click", function () {
+    playRound(button.value);
+    // console.log(`Clicked ${button.value} button!`);
+    displayResult.textContent = res;
+    scoreBoard.textContent = finalScore;
+  });
+});
