@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Tactile&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, .result, .scoreboard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body{
+    background-color: #357a8f73;
+}
+
+.container{
+    display: flex;
+    gap: 70px;
+}
+
+input{
+    font-family: 'Syne Tactile', cursive;
+    font-weight: 900;
+    font-size: larger;
+    margin: 90px 0 30px 0;
+    padding: 30px;
+    width: 190px;
+    height: auto;
+    background-color: #22d0b88c;
+    color: #200d32;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px #2a2ca3, 0 -1px 4px rgba(236, 29, 191, 0.667);
+}
+
+.result, .scoreboard{
+    font-family: 'Syne Tactile', cursive;
+    font-size: large;
+    font-weight: 400;
+    color: #200d32;
+    background-color: #28daf7;
+    border: 2px solid #b6bbba;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px #5dcac1, 2px 0 4px #5dcac1, -2px 0 4px #5dcac1, 0 -2px 4px #5dcac1;
+}
+
+.result{
+    margin-bottom: 20px;
+    padding: 8px;
+    height: 85px;
+    width: 370px;
+    text-justify: auto;
+}
+
+.scoreboard{
+    height: 85px;
+    width: 211px;    
+}
